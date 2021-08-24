@@ -2,13 +2,13 @@
 function inputField(asd){
     const inputValue = document.getElementById(asd);
     const inputValueText = inputValue.value;
-    const inpitValueNum = parseFloat(inputValueText);
+    const inputValueNum = parseFloat(inputValueText);
 
     // clear inout field
     inputValue.value = "";
 
     // return value
-    return inpitValueNum;
+    return inputValueNum;
 }
 
 // total amount
@@ -20,12 +20,12 @@ function total(id, newValue){
     balance.innerText = newBalance;
 }
 
-// get current balance
-function currentBalance(id){
-    const balance = document.getElementById(id);
-    const balanceText = balance.innerText;
-    const balanceNum = parseFloat(balanceText);
-    return balanceNum;
+// get current main balance
+function checkMainBalance(id){
+    const mainBalance = document.getElementById(id);
+    const mainBalanceText = mainBalance.innerText;
+    const mainBalanceNum = parseFloat(mainBalanceText);
+    return mainBalanceNum;
 }
 
 // main Balance
@@ -68,13 +68,15 @@ document.getElementById('diposit-btn').addEventListener('click', function(){
 
 // Withdraw section
 document.getElementById('withdraw-btn').addEventListener('click', function(){
-    // // get withdraw
 
+    // get current main balance
+    const currentMainBalance = checkMainBalance('main-blance');
+
+    // get withdraw
     const withdrawAmount = inputField('withdraw-amount');
 
     // update Withdraw
-
-    if(withdrawAmount > 0){
+    if(withdrawAmount > 0 && withdrawAmount < currentMainBalance){
     total('withdraw-balance', withdrawAmount)
 
     // update main balance
